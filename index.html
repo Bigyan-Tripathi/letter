@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>For Miss 💙</title>
+<title>For Aiesha 💙</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet"/>
 <style>
   :root {
@@ -40,6 +40,8 @@
   .open-btn { font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.2em;text-transform:uppercase;color:#0d0608;background:linear-gradient(135deg,var(--pink),var(--pink-soft));border:none;padding:0.9rem 2.8rem;border-radius:50px;cursor:none;opacity:0;animation:up 1.4s ease 1.5s forwards;position:relative;z-index:2;box-shadow:0 4px 30px var(--pink-glow);transition:all 0.3s ease; }
   .open-btn:hover { transform:translateY(-3px) scale(1.04);box-shadow:0 8px 40px #e8607a55; }
   .song-hint { font-style:italic;font-size:0.85rem;color:var(--text-dim);margin-top:1.2rem;opacity:0;animation:up 1.4s ease 2s forwards;position:relative;z-index:2; }
+  .music-btn { background:transparent;border:1px solid #e8607a55;border-radius:50px;padding:0.5rem 1.4rem;color:var(--text-mid);font-family:'DM Sans',sans-serif;font-size:0.75rem;letter-spacing:0.15em;cursor:pointer;margin-top:0.6rem;opacity:0;animation:up 1.4s ease 2.3s forwards;position:relative;z-index:2;transition:all 0.3s;display:block; }
+  .music-btn:hover,.music-btn:active { border-color:var(--pink);color:var(--rose);box-shadow:0 0 15px var(--pink-glow); }
   @keyframes up { to{opacity:1;transform:translateY(0)} }
 
   #main { display:none; }
@@ -103,14 +105,16 @@
 <div id="landing">
   <div class="glow-circle" style="width:700px;height:700px;top:-200px;left:50%;transform:translateX(-50%);"></div>
   <div class="glow-circle" style="width:400px;height:400px;bottom:-100px;left:10%;animation-delay:2.5s;"></div>
-  <div class="land-title">For My Aiesha</div>
+  <div class="land-title">For Aiesha</div>
   <div class="land-sub">a letter from your big boy</div>
   <div class="land-line"></div>
   <button class="open-btn" onclick="enter()">Open the Letter 💌</button>
   <div class="song-hint">🎵 a song is playing for you</div>
+  <button class="music-btn" id="music-btn" onclick="playMusic()">▶ tap to play the song</button>
+  <button class="music-btn" id="music-btn" onclick="playMusic()">▶ tap to play the song</button>
 </div>
 
-<div id="music-bar">
+<div id="music-bar" onclick="playMusic()" style="cursor:pointer;">
   <div class="music-dot"></div>
   <span class="music-label">playing for you 🎵</span>
 </div>
@@ -137,7 +141,7 @@
     <div class="sec-inner">
       <div class="part-label">PART 1</div>
       <div class="letter">
-        <p>Geet suniraxau? Volume upp upp fast, Now I take that as a yes : )</p>
+        <p>Geet suneu? I take that as a yes : )</p>
         <p>If someone is easily available to others they're considered cheap, value of someone is known when they patiently wait… like? Like who? Like me.. who patiently waited for you, waited even when I was no one to you, even when I was just a friend to you and even when I was almost EX to you. Jaba tmi sanga pailo choti kura garey I crossed my limits, limits of control raha nahi gaya flirt garna bata, xucchi pretty eyes with so many dreams basically a free bird️, who could resist? Maile ni resist garna Sakina. For a while thought you'd be my Gf first heartbreak without being in relationship tmro bf xa thapauda haha but I had a crush on you nita so decided to stay like your hacker friend?? Umm yes, you'd text me share your tuff days, tell me who you hate, tell me who you like, tell me about your family I was happiest Tara life has phases hainata ahahah bolna xodeu I was kinda hopeless tara kaile na boleni tmro tiktok stalk hanna xoddina thea hai j hos just to see your posts. Time went by ani feri bolna thaleu and yk what I wanted to propose you but I was scared too, aba esto decision kasari banais? Ekkasi bolna aayo bhandai ma sochlau mhmm I had a specific reason that made me fall harder tmlai ta yad ni xaina bhantheauu but that's when ma sanga mobile nahuda ani batti gako bela you.. you send me SMS saying batti gako ho sir? Let's talk here I wannah talk to you.. WHATTTTTT.. LIKE WHATTTTT not gonnah lie I said that to my friend too I said I kinda love her and he said well propose her then and tell me so strong reason ta ho nita hehe but life happened, I sent you tyo SMS ko photo and said my precious day and you felt cringe and said "WHY WOULD YOU SS THAT" huhu tara hope gayo mero? Not yet I thought laaj lageko hoki? Positive as Fuck but life happened again you loved someone else and wanted him so what would I even do now I lost all of my hopes completely but I can bet tyo bela ni jati cahanthea tmlai without lust thorai nai thea hola ani kere thaxaa I almost cried but you were soo happy yk so let me help you bhanera I was like love guru even tho I never fell for anyone harder except for you I had experiences of spying accounts & khasai details na payeni koko sanga bolxa thapayera bhaneko thea and tyo list bata 1..2 jana chineko ni theau tmle well that was all I could do to see you happy huhu and you stopped talkin to me again actually boltheau but you started ignoring me very hard so what I felt is instead of ruining what he had like Sir Miss thing I should backout and bolna xodey but with a hope you'd text me again someday.</p>
         <p>Aba socha kati valuable bhayeu hola tmi mero lagi if I was someone else ma jatiko positive sochdaina theo hola. You became someone for whom I would do anything if I got a chance, not because you ignored me or you didn't love me. Its because I waited patiently. This part should answer you how precious you are</p>
       </div>
@@ -300,28 +304,47 @@ window.addEventListener('scroll',()=>{
   document.getElementById('progress').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';
 });
 
+let ytPlayer = null;
+let ytReady = false;
+
+function loadYT(autoplay){
+  if(document.getElementById('yt-player')) {
+    if(autoplay && ytPlayer) ytPlayer.playVideo();
+    return;
+  }
+  const tag=document.createElement('script');
+  tag.src='https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+  window.onYouTubeIframeAPIReady=function(){
+    ytReady=true;
+    const div=document.createElement('div');
+    div.id='yt-player';
+    div.style.cssText='position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;';
+    document.body.appendChild(div);
+    ytPlayer=new YT.Player('yt-player',{
+      videoId:'oafxkMv4xnc',
+      playerVars:{autoplay:autoplay?1:0,loop:1,playlist:'oafxkMv4xnc',controls:0,mute:0},
+      events:{onReady:function(e){e.target.setVolume(80);if(autoplay)e.target.playVideo();}}
+    });
+  };
+}
+
+function playMusic(){
+  if(ytPlayer){ ytPlayer.playVideo(); }
+  else { loadYT(true); }
+  const btn=document.getElementById('music-btn');
+  if(btn){ btn.textContent='🎵 playing...'; btn.style.borderColor='var(--pink)'; btn.style.color='var(--rose)'; }
+}
+
 function enter(){
   const land=document.getElementById('landing');
   land.style.transition='opacity 1s ease, transform 1s ease';
   land.style.opacity='0'; land.style.transform='scale(1.05)';
+  loadYT(true);
   setTimeout(()=>{
     land.style.display='none';
     document.getElementById('main').style.display='block';
     document.getElementById('music-bar').style.display='flex';
-    const tag=document.createElement('script');
-    tag.src='https://www.youtube.com/iframe_api';
-    document.head.appendChild(tag);
-    window.onYouTubeIframeAPIReady=function(){
-      const div=document.createElement('div');
-      div.id='yt-player';
-      div.style.cssText='position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;';
-      document.body.appendChild(div);
-      new YT.Player('yt-player',{
-        videoId:'oafxkMv4xnc',
-        playerVars:{autoplay:1,loop:1,playlist:'oafxkMv4xnc',controls:0,mute:0},
-        events:{onReady:function(e){e.target.setVolume(80);e.target.playVideo();}}
-      });
-    };
     initReveal();
   },1000);
 }
