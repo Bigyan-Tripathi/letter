@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For Miss 💙</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0d0608;
+    --bg2: #130a0e;
+    --pink: #e8607a;
+    --pink-soft: #c4526a;
+    --pink-glow: #e8607a33;
+    --rose: #f0a0b0;
+    --cream: #f5e8ec;
+    --text: #f0dde3;
+    --text-mid: #c4a0aa;
+    --text-dim: #7a5560;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); font-family:'Cormorant Garamond',serif; color:var(--text); overflow-x:hidden; cursor:none; }
+
+  .cursor { width:8px;height:8px;background:var(--pink);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--pink); }
+  .cursor-ring { width:28px;height:28px;border:1px solid var(--pink-soft);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.2s ease; }
+
+  .petal-container { position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden; }
+  .petal { position:absolute;border-radius:50% 0 50% 0;opacity:0;animation:fall linear infinite; }
+  @keyframes fall { 0%{transform:translateY(-10px) rotate(0deg);opacity:0.5} 100%{transform:translateY(105vh) rotate(540deg);opacity:0} }
+
+  #progress { position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#8a3a4e,var(--pink),var(--rose));z-index:200;width:0;box-shadow:0 0 8px var(--pink); }
+
+  #landing { height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 60%,#2a0a14 0%,#0d0608 70%); }
+  .glow-circle { position:absolute;border-radius:50%;background:radial-gradient(circle,#e8607a18,transparent 70%);animation:breathe 5s ease-in-out infinite; }
+  @keyframes breathe { 0%,100%{transform:scale(1);opacity:0.6} 50%{transform:scale(1.15);opacity:1} }
+  .land-title { font-family:'Pinyon Script',cursive;font-size:clamp(4rem,12vw,8rem);color:var(--rose);text-shadow:0 0 40px #e8607a60,0 0 80px #e8607a30;opacity:0;transform:translateY(30px);animation:up 1.4s ease 0.4s forwards;position:relative;z-index:2; }
+  .land-sub { font-size:clamp(0.85rem,2vw,1.1rem);letter-spacing:0.3em;text-transform:uppercase;color:var(--text-mid);margin-top:0.8rem;opacity:0;animation:up 1.4s ease 0.9s forwards;position:relative;z-index:2; }
+  .land-line { width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--pink),transparent);margin:1.5rem auto;opacity:0;animation:up 1.4s ease 1.2s forwards;box-shadow:0 0 8px var(--pink); }
+  .open-btn { font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.2em;text-transform:uppercase;color:#0d0608;background:linear-gradient(135deg,var(--pink),var(--pink-soft));border:none;padding:0.9rem 2.8rem;border-radius:50px;cursor:none;opacity:0;animation:up 1.4s ease 1.5s forwards;position:relative;z-index:2;box-shadow:0 4px 30px var(--pink-glow);transition:all 0.3s ease; }
+  .open-btn:hover { transform:translateY(-3px) scale(1.04);box-shadow:0 8px 40px #e8607a55; }
+  .song-hint { font-style:italic;font-size:0.85rem;color:var(--text-dim);margin-top:1.2rem;opacity:0;animation:up 1.4s ease 2s forwards;position:relative;z-index:2; }
+  @keyframes up { to{opacity:1;transform:translateY(0)} }
+
+  #main { display:none; }
+
+  nav { position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(13,6,8,0.85);backdrop-filter:blur(16px);border-bottom:1px solid #e8607a18; }
+  .nav-logo { font-family:'Pinyon Script',cursive;font-size:2rem;color:var(--pink);text-shadow:0 0 15px var(--pink-glow); }
+  .nav-links { display:flex;gap:1.5rem;list-style:none; }
+  .nav-links a { font-family:'DM Sans',sans-serif;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-mid);text-decoration:none;transition:color 0.3s;position:relative; }
+  .nav-links a::after { content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--pink);transition:width 0.3s;box-shadow:0 0 6px var(--pink); }
+  .nav-links a:hover { color:var(--rose); }
+  .nav-links a:hover::after { width:100%; }
+
+  .sec { min-height:100vh;padding:8rem 2rem 6rem;display:flex;align-items:center;justify-content:center;position:relative; }
+  .sec:nth-child(odd) { background:var(--bg); }
+  .sec:nth-child(even) { background:var(--bg2); }
+  .sec-inner { max-width:760px;width:100%;position:relative;z-index:2; }
+  .bg-num { position:absolute;top:4rem;right:1.5rem;font-family:'Cormorant Garamond',serif;font-size:12rem;font-weight:300;color:#e8607a07;line-height:1;pointer-events:none;user-select:none; }
+
+  .part-label { font-family:'DM Sans',sans-serif;font-size:0.65rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--pink);margin-bottom:1rem;display:flex;align-items:center;gap:0.8rem;opacity:0;transform:translateY(20px);transition:all 0.7s ease; }
+  .part-label::before { content:'';width:28px;height:1px;background:var(--pink);box-shadow:0 0 6px var(--pink);display:inline-block; }
+  .part-label.show { opacity:1;transform:translateY(0); }
+
+  .sec-head { font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:300;line-height:1.25;color:var(--cream);margin-bottom:2rem;opacity:0;transform:translateY(24px);transition:all 0.8s ease 0.1s; }
+  .sec-head em { font-style:italic;color:var(--pink); }
+  .sec-head.show { opacity:1;transform:translateY(0); }
+
+  .letter { font-size:clamp(1rem,1.9vw,1.13rem);font-weight:400;line-height:2;color:var(--text);opacity:0;transform:translateY(20px);transition:all 0.8s ease 0.2s; }
+  .letter.show { opacity:1;transform:translateY(0); }
+  .letter p { margin-bottom:1.5rem; }
+
+  .divider { width:50px;height:1px;margin:2.5rem 0;background:linear-gradient(90deg,var(--pink),#8a3a4e,transparent);box-shadow:0 0 8px var(--pink-glow); }
+
+  .glow-quote { border-left:2px solid var(--pink);padding:1rem 1.5rem;margin:1.5rem 0;background:#e8607a0a;border-radius:0 8px 8px 0;font-style:italic;color:var(--rose);box-shadow:inset 0 0 20px #e8607a08; }
+
+  .mem-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-top:2rem; }
+  .mem-card { background:#1a0d12;border:1px solid #e8607a22;border-radius:12px;padding:1.2rem;opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease,box-shadow 0.4s,border-color 0.4s; }
+  .mem-card.show { opacity:1;transform:translateY(0); }
+  .mem-card:hover { transform:translateY(-5px) rotate(-0.4deg);box-shadow:0 8px 30px #e8607a25;border-color:#e8607a55; }
+  .mem-icon { font-size:1.5rem;margin-bottom:0.5rem; }
+  .mem-text { font-family:'DM Sans',sans-serif;font-size:0.82rem;color:var(--text-mid);line-height:1.5; }
+
+  #sec10 { background:radial-gradient(ellipse at 50% 100%,#2a0a14 0%,#0d0608 60%) !important; }
+  .signature { font-family:'Pinyon Script',cursive;font-size:3.5rem;color:var(--pink);text-shadow:0 0 20px var(--pink-glow);margin-top:2.5rem;line-height:1; }
+  .ps { font-style:italic;font-size:0.9rem;color:var(--text-dim);margin-top:1rem;padding:0.8rem 1.2rem;border-left:2px solid #8a3a4e;background:#e8607a08; }
+
+  #music-bar { position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;background:#1a0d12ee;border:1px solid #e8607a33;border-radius:50px;padding:0.6rem 1.2rem;display:none;align-items:center;gap:0.6rem;backdrop-filter:blur(10px);box-shadow:0 4px 20px #e8607a20; }
+  .music-dot { width:8px;height:8px;border-radius:50%;background:var(--pink);animation:blink 1.2s ease-in-out infinite;box-shadow:0 0 8px var(--pink); }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .music-label { font-family:'DM Sans',sans-serif;font-size:0.7rem;letter-spacing:0.1em;color:var(--text-mid); }
+
+  @media(max-width:600px){ .nav-links{display:none} .sec{padding:6.5rem 1.2rem 5rem} .mem-grid{grid-template-columns:1fr 1fr} }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curRing"></div>
+<div id="progress"></div>
+<div class="petal-container" id="petals"></div>
+
+<div id="landing">
+  <div class="glow-circle" style="width:700px;height:700px;top:-200px;left:50%;transform:translateX(-50%);"></div>
+  <div class="glow-circle" style="width:400px;height:400px;bottom:-100px;left:10%;animation-delay:2.5s;"></div>
+  <div class="land-title">For My Aiesha</div>
+  <div class="land-sub">a letter from your big boy</div>
+  <div class="land-line"></div>
+  <button class="open-btn" onclick="enter()">Open the Letter 💌</button>
+  <div class="song-hint">🎵 a song is playing for you</div>
+</div>
+
+<div id="music-bar">
+  <div class="music-dot"></div>
+  <span class="music-label">playing for you 🎵</span>
+</div>
+
+<div id="main">
+  <nav>
+    <div class="nav-logo">B ♡ A</div>
+    <ul class="nav-links">
+      <li><a href="#sec1">Part 1</a></li>
+      <li><a href="#sec2">Part 2</a></li>
+      <li><a href="#sec3">Part 3</a></li>
+      <li><a href="#sec4">Present</a></li>
+      <li><a href="#sec5">Assurance</a></li>
+      <li><a href="#sec6">Probs</a></li>
+      <li><a href="#sec7">Need</a></li>
+      <li><a href="#sec8">Never Told</a></li>
+      <li><a href="#sec9">Working On</a></li>
+      <li><a href="#sec10">Closing</a></li>
+    </ul>
+  </nav>
+
+  <section class="sec" id="sec1">
+    <div class="bg-num">01</div>
+    <div class="sec-inner">
+      <div class="part-label">PART 1</div>
+      <div class="letter">
+        <p>Geet suniraxau? Volume upp upp fast, Now I take that as a yes : )</p>
+        <p>If someone is easily available to others they're considered cheap, value of someone is known when they patiently wait… like? Like who? Like me.. who patiently waited for you, waited even when I was no one to you, even when I was just a friend to you and even when I was almost EX to you. Jaba tmi sanga pailo choti kura garey I crossed my limits, limits of control raha nahi gaya flirt garna bata, xucchi pretty eyes with so many dreams basically a free bird️, who could resist? Maile ni resist garna Sakina. For a while thought you'd be my Gf first heartbreak without being in relationship tmro bf xa thapauda haha but I had a crush on you nita so decided to stay like your hacker friend?? Umm yes, you'd text me share your tuff days, tell me who you hate, tell me who you like, tell me about your family I was happiest Tara life has phases hainata ahahah bolna xodeu I was kinda hopeless tara kaile na boleni tmro tiktok stalk hanna xoddina thea hai j hos just to see your posts. Time went by ani feri bolna thaleu and yk what I wanted to propose you but I was scared too, aba esto decision kasari banais? Ekkasi bolna aayo bhandai ma sochlau mhmm I had a specific reason that made me fall harder tmlai ta yad ni xaina bhantheauu but that's when ma sanga mobile nahuda ani batti gako bela you.. you send me SMS saying batti gako ho sir? Let's talk here I wannah talk to you.. WHATTTTTT.. LIKE WHATTTTT not gonnah lie I said that to my friend too I said I kinda love her and he said well propose her then and tell me so strong reason ta ho nita hehe but life happened, I sent you tyo SMS ko photo and said my precious day and you felt cringe and said "WHY WOULD YOU SS THAT" huhu tara hope gayo mero? Not yet I thought laaj lageko hoki? Positive as Fuck but life happened again you loved someone else and wanted him so what would I even do now I lost all of my hopes completely but I can bet tyo bela ni jati cahanthea tmlai without lust thorai nai thea hola ani kere thaxaa I almost cried but you were soo happy yk so let me help you bhanera I was like love guru even tho I never fell for anyone harder except for you I had experiences of spying accounts & khasai details na payeni koko sanga bolxa thapayera bhaneko thea and tyo list bata 1..2 jana chineko ni theau tmle well that was all I could do to see you happy huhu and you stopped talkin to me again actually boltheau but you started ignoring me very hard so what I felt is instead of ruining what he had like Sir Miss thing I should backout and bolna xodey but with a hope you'd text me again someday.</p>
+        <p>Aba socha kati valuable bhayeu hola tmi mero lagi if I was someone else ma jatiko positive sochdaina theo hola. You became someone for whom I would do anything if I got a chance, not because you ignored me or you didn't love me. Its because I waited patiently. This part should answer you how precious you are</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sec2">
+    <div class="bg-num">02</div>
+    <div class="sec-inner">
+      <div class="part-label">PART 2</div>
+      <div class="sec-head">Maile kaile past ko khulera bhanina bhantheau ni 11 ko barema <em>let me tell you.</em></div>
+      <div class="letter">
+        <p>It's when I was in whitehouse, I was just a introvert guy small friend circle, Table Tennis and study & its when someone showed interest in me I was amazed cause interest on me? Lol and story ta tmlai tha nei xa got betrayed she broke my heart chose to secretly romance and flort with others but she was like 1st and last mistake after touching others wth maybe god wanted to teach me…. Bhanxan ni Some people don't break your heart by leaving they break it by staying they never completely choose you but they'll give you enough hope to make you stay kinaki they are never clear about you they have feelings for us but there's no commitments and then you'll realize that every person who touches your soul are not meant to stay in your life and the worst part is they can't even love you and you can't even hate them that's what happened it isn't a funny past but yeah totally over it so I don't talk much about it tara bhanisake tmlai. Whatever happens happens for good cause look I was so happy when a pretty girl decided to text me again yes you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sec3">
+    <div class="bg-num">03</div>
+    <div class="sec-inner">
+      <div class="part-label">PART 3</div>
+      <div class="sec-head"><em>You</em></div>
+      <div class="letter">
+        <div class="glow-quote">btw( loosing you hurt, but loosing myself hurts more… and that happens if I loose you… I am all about you)</div>
+        <p>I was still a introvert guy tei padyo, game khelyo, series heryo, movie heryo ani aru keiko bal xaina ani that time 12 sakina lako theo had a fear about result and confused aba 12 paxi office ma k garnu hola… got a notification.. Aiesha Timilsina rey whoa I was like after soo long she finally texted? Mhmm crazy tara thought you saw me online so checkup gareki and you'll goo soon but another side of me was very happy to see your text && you gave me wishes for exam ani exam sakesi text me bhaneu and we started talkin, sharing reels ale ale flriting too mhmm I knew this was going somewhere but had not guts to propose or smt and slowly so its 7th May, 2024 yo date chai I call it official date ahaha and then euta point theo when we both knew we are already loving eachother tara I love you exchange bhako theana so hami kura garda yo topic ayo and we exchanged I love you and yes I was new to a realistic relationship so I had many low qualities of perfect guy…. Well maybe that's why I easily get jealous and sad when the topic is third party in relationship. But look tmi kati valuable xau for me no one could ever match that tmlai payera ni tyo kam bhayena, jun way ma mw tmlai herxu ni that purity is uncomparable to any couple. Tmlai payesi testo unvaluable kei bhayena baru fear hunxa, huntheo pani hunxa pani that fear is of loosing you huhu. Aba relationship hudai gayo ani one point ma hamro disconnection tha nei xa tmlai june month ma. Taba pani maile instead of ruining everything I'll let you go bhanera very hard decision banako but cried like hell I know you were sad too ani I wanted to tell you taba tara aat aayeko theana that tmle hamro na ramro moment sab yad gareu ani man ta bhariyo but what about those hundreds and thousands of small good memories that we had like hike orientation chiya ghar studying together walking home together aba ahile ko phase sanga compare garne ho bhane ta we had emotional connection alik kam ani communication not good and i'll talk about kiss too wait for that so eso sochda sabai kura develop bha theana ani tei bhayera jasto lagxa ahile sochda chai and I'll make sure testo nahos baru bolenau bhane gangan irritate lang hanxu tara communication is the key. Tesaile babe jaba jaba communication chainxa jasto lagxa please don't backout huss mani hunna tmini nahau small things matter k bhayo ta ek arka sanga rutheo bhayeni afnei ta ho aru ko maal thodi hora anfai maal ho afaile ek arka lai samhalna parxa</p>
+        <p>And I was almost your EX. But I had that patience tmlai ta aru sanga bolyo lagya theo hola ofc lagxa pani malai ni aru sanga boldai xeki lagtheo hunxa testo manxe ko 8 months breakup bhayera ta bihe bhako hunxa huhu and then yes I had that patience I was never ready to end up being your friend. If tyo break ko phase ma kasaile ko ho bhaneko bhaye she's my miss bhanthea cause I can not see you as a friend maile tmlai mero miss ho nei sochera mind haluka banauthea clg ma huhu and after we sorted that out you might have seen change in me VERY CLINGY WITH YOU, NO SLEEP WITHOUT CLEARANCE even tmi ni astina sutenau clear garna khojeu before sleep I loved that and now I AM TOTALLY INTO YOU lukaudina love xa bhane dekhauxu that's it</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sec4">
+    <div class="bg-num">04</div>
+    <div class="sec-inner">
+      <div class="part-label">PRESENT STATE</div>
+      <div class="sec-head"><em>honestly I swear… last hope, last person, last efforts, last trust and last energy it's you</em></div>
+      <div class="letter">
+        <p>Talking about our present state we have had a lot of memories and more to go. Even tho risako bela we might remember every bad moments but there are way more happy moments. First time we made eachother smile, made eachother feel pure love happy moments like hike, orientation, chiya ghar/spot, bouddha, sisneri, mustang/Pokhara, Netflix and chill, late night study for exam, birthday presents and many more small things jun risako bela fitikkai yad hudaina I know that's human nature not our or anyone's fault so we gotta remember our happy moments and then cheer up eachother and move forward. Misunderstandings, fights ta relationship ma hunxa nai so we gotta think out happy moments and the dreams we promised eachother before ever giving up on eachother CAUSE WE HAVE MORE TO GO</p>
+      </div>
+      <div class="mem-grid">
+        <div class="mem-card"><div class="mem-icon">🥾</div><div class="mem-text">hike</div></div>
+        <div class="mem-card"><div class="mem-icon">🎓</div><div class="mem-text">orientation</div></div>
+        <div class="mem-card"><div class="mem-icon">☕</div><div class="mem-text">chiya ghar/spot</div></div>
+        <div class="mem-card"><div class="mem-icon">🕌</div><div class="mem-text">bouddha</div></div>
+        <div class="mem-card"><div class="mem-icon">🌊</div><div class="mem-text">sisneri</div></div>
+        <div class="mem-card"><div class="mem-icon">🏔️</div><div class="mem-text">mustang/Pokhara</div></div>
+        <div class="mem-card"><div class="mem-icon">🎬</div><div class="mem-text">Netflix and chill</div></div>
+        <div class="mem-card"><div class="mem-icon">🌙</div><div class="mem-text">late night study for exam</div></div>
+        <div class="mem-card"><div class="mem-icon">🎁</div><div class="mem-text">birthday presents</div></div>
+      </div>
+      <div class="letter" style="margin-top:2rem;">
+        <p>About the kiss you are soo freakinn beautiful and my love is true for you so maile lust lai prior deko bhaye ta mmmm tmle tharki sala bhantheau ni real wala hunthea hola but I love your soul ahahahaha kiss garna man na lagya haina I had days when I wanted to kiss you so bad and you also said all yours taba chai laj lagera ho cause ekchoti garna lai dar lagxa huhu but chiya ghar yumm bypass bhayo tyo dar ahaha and the passionate kiss we do is soo satisfying</p>
+        <p>and HOW COULD YOU GO HOME WHEN YOU ARE ANGRY WITH ME K I WOULD HAVE KISSED YOU CHEERED YOU UP huhu</p>
+        <p>I love you soooooooooooooooooooooo MUCHHHHHHHHH</p>
+        <p>Hamro relationship ko kura sunda two young people trying to be together lagxa hai ignoring eachothers flaws and accepting eachother, changing for eachother I know we still ain't perfect yet but trust me we have gone through many things we can go more</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sec5">
+    <div class="bg-num">05</div>
+    <div class="sec-inner">
+      <div class="part-label">PART 4</div>
+      <div class="sec-head">Assurance and <em>clarity</em></div>
+      <div class="letter">
+        <p>Now part 4 is about assurance for you about your past and present. Mhmm I know tmle past ko kura sunda hurt hunxa bhaneko theau but I am your bf I wont ever mock you abt your past let me tell you something, I've always known your inner soul afterall I love you soo much why wouldn't I? Maybe sometimes when it's all silence your heart feels heavy, remembering your past, realizing how useless people can be. how hurting they can be but why cry for someone like those guys who has no value for your love for those guys who doesn't care about your presence, crying for such people is disrespecting yourself maya always remember loving is very necessary but not at the place where your value is not cared … leaving the person who has zero knowledge about your value is the best way you have respected yourself. Whenever your heart feels heavy remember that you respected your value cause Aiesha is not someone who loses her self-respect over some fucking horny looser.</p>
+        <p>Tyota past ko bhayo what about present? Well I assure you that I am never choosing anyone over you. I would rather die fr. I might be little nosy or irritating sometimes if I get jealous or something but am never disrespecting you or making you feel unworthy I'll always protect you from bad and unlucky eyes. Paila paila sano theam sano kura huntheo ani Sanai kura ma support garthea but now we have grown up so thula thula sapana hunxa kura hunxa ra sabai kura ma support garcu mero raja lai. Duniya le j sukai bhanos, family le j sukai bhanos you'll never find me standing against you. Sukha ma matra haina tmro harek fall harek dukha ma basxu idc ma basera tmlai help bhairako xaina bhane pani I'll be sitting beside you and whenever you need me I'll make it up to you mhmm yup and I expect the same too cause I need my babygirl too ahaha. Tmlai bhane dui din ma birsela sochlau but it is what it is.. I am a man and I'll do what I promised like a man. And yes I'll not only protect you from bad eyes I'll protect you from anyone who is trying to disrespect you, and always remember to realize your standards with every people even me no one has rights to lower your standards. Either in college or job or relationship or family cause euta life xa jabo tesma ni dabera chai basna dinu hunna afu lai and yeah ma dida ni dinna muuuuahh.</p>
+        <p>Mhmm ani ma k ko clarity dina cahanxu bhane mero raja lai that I am not a kind of person who looks at other girls behind your back. Ma sanga mero lovely gf xa aba tmro paxadi ma aru lai herera basnu ko self growth garnu? Ofc self growth we have got dreams ma tharki tmro lagi ko aru kasaiko lagi haina. And I am not a kind of guy who thinks afno gf xa bhandai ma for granted lini maile paila ni bhaneko xu but this is reality sometimes text ma maile kei bhanda rude sound garxa I have realized even when mero real life ma testo reaction bhairako hunna so I'll fix that too baby. Arko clarity k ho bhane I have our future dreams in my mind like a permanent stamp no matter what I'll make it happen from our beautiful dream house to our pets like cats, horse to tour on every possible destiny countries to everything I'll make it happen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sec6">
+    <div class="bg-num">06</div>
+    <div class="sec-inner">
+      <div class="part-label">PART 5</div>
+      <div class="sec-head"><em>Probs in me</em></div>
+      <div class="letter">
+        <p>Aba afno tarif matra ta garera ni bhayena haina ra huhu so leme talk about my default settings tho... About health ntn bad all clear i just need to build up my muscles to glow more toyta answer bhayena so about my default settings.. I am emotional guy maybe i think i am more emotional than you when it comes to yk loved person ma afno momy tira gaxu and another thing is ofc yes i get jealous maybe more easily thn you but i know you are also jealous girl when it comes to other ppl between us ahahahaha prapti example.. But ma chai tesari hold garera basna sakdina huhu like you did & another thing is ma aru manxe sanga ta danger risaune manxe ho still improving in your case because i want to treat you like a queen who says my guy never yells at me so huhu improvin.. And yeah that's it if aru kunai xa jun maile catch garna sakina bhane baby please tell me .. ILOVEYOUSOOMUCHH</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sec7">
+    <div class="bg-num">07</div>
+    <div class="sec-inner">
+      <div class="part-label">PART 6</div>
+      <div class="sec-head">What I need from <em>you too</em></div>
+      <div class="letter">
+        <p>Hehehe i ain't selfish but yk i gotta ask smt from you too baby you're very perfect there was smt abt that yk sakar which i didn't like but nevermind that's past and ik that you know aba dekhi gardnu hunna rn i see you as a perfect human beingn but still leme ask smt from you. I might sound foolish sometimes, sometimes stupid but if it's between other people support me okay i dont want you against me when we are among other people. And cover my back if i ain't there ahahaha aru chai support me if i am willin to take risk on some good things huss also. Slap me if something hurts you but don't look back on me. That's all baby your standards should be high cause thats what makes a women attractive</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sec8">
+    <div class="bg-num">08</div>
+    <div class="sec-inner">
+      <div class="part-label">PART 7</div>
+      <div class="sec-head">Things I <em>never told you</em></div>
+      <div class="letter">
+        <p>Soo things i never told you ma k parxa bhane one feeling that is: tmi sanga chai malai dar lagxa kun kurama bhane whenever i do silly mistakes that you dont want me to do like sut bhaneu re 11 baje agadi tara 12 bajna atisako re noww man manai dar lagxa like shii i messed up normal ho but i respect ur words dar lagxa yrhh huhu. Aru kura chai kaile kai malai na ramro lagyo kasaiko life dekhera like kasaiko breakup kasaiko days sama fight taba man manai my gf is not like that bhanera man haluko hunxa you comfort me</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sec9">
+    <div class="bg-num">09</div>
+    <div class="sec-inner">
+      <div class="part-label">PART 7</div>
+      <div class="sec-head">Things i am working on to make our <em>dream happen</em></div>
+      <div class="letter">
+        <p>You know me kali am not someone who talks big without meaning it so let me tell you what is goinn on behind the scenes the things I do quietly daily with one person in mind jun chai tmi ho Right now I am learning Python advance majjale honestly the biggest motivation is not some job or certificate it is you I want to teach you sit beside you chiya ghar ma hos ya college mai hos i want to explain it line by line I want to be someone who does not just promise you a future but actually builds it.</p>
+        <p>And then there is automobiles too It is not just a place jata ma janxu gadi bechya commission paucu not anymore it is becoming a responsibility I am choosing to carry for our future. I used to not think much about it but now when I think about the house we talked about the travel the life we planned I realize someone has to build the base aafai ta hudaina nita and I want that someone to be me so aba tyani ma mastale grow garxu</p>
+        <p>babe, it is not just the career stuff I am working on me too the parts that are harder which is Overthinking.... my biggest enemy honestly my brain runs wild sometimes turns your silence into a story and your mood into my mistake. I am working on it baby I'll fix it afno overthink lai feed gardina ma babe</p>
+        <p>Arko kura i am working on is being less clingy cuzz I know sometimes my love can feel like a little too much pressure notice ni gareko xu maile huhu and that is never my intention you deserve someone who loves you freely not someone who loves you desperately.</p>
+        <p>Every single one of these like all of the things that i am working has your name on it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sec10">
+    <div class="bg-num">10</div>
+    <div class="sec-inner">
+      <div class="part-label">PART 8 + MY LAST WORDS</div>
+      <div class="sec-head">After all this… <em>My Last Words (For Now)</em></div>
+      <div class="letter">
+        <p>After all this you must have realized that you were never just a chapter you are the whole story iloveyousooomuchh infact I would do it all again for you just 4UUUUU</p>
+        <p>Soo if you have any questions letter padepaxi do tell me okay baby</p>
+        <div class="divider"></div>
+        <p>And here we are at the end of this letter tara it is not the end tho it is just me pausing to breathe cause bubuuuu there is still so much I want to say so much I want to do so much I want to show you This letter could never be long enough to hold everything I feel for you but I hope it showed you at least a little bit of what is in my hairy chest ahahahah so baby jaba jaba tmlai want you to unseen unloved feel hunxa or if you're tired of everything come back here. Because I wrote every single word with full honesty no guff no AI Just me I am not perfect our relationship is not perfect and I am not pretending it is But what I know for sure is that what I feel for you is the most real thing I have ever felt</p>
+        <p>So my last words for now are simple thank you Thank you for choosing me even when I was hard to understand Thank you for staying even when leaving felt easier.Thank you for the chiya ghar moments the late nights the small fights the big laughs thankyouu ta na bhanne kura theo but take it this time huhu</p>
+        <p>I love you AieeeICYYYbudiimussoomissskalii.</p>
+      </div>
+      <div class="signature">Bigyan Tripathiiiiii 💙</div>
+      <div class="ps">*bides ma huda ani meroma batti gako bela pani esei sms gari nai gara hai forever 😭*</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const cur = document.getElementById('cur');
+const curRing = document.getElementById('curRing');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px';
+  curRing.style.left = e.clientX+'px'; curRing.style.top = e.clientY+'px';
+});
+
+(function(){
+  const c = document.getElementById('petals');
+  for(let i=0;i<22;i++){
+    const p=document.createElement('div'); p.className='petal';
+    const s=5+Math.random()*7;
+    p.style.cssText=`left:${Math.random()*100}vw;width:${s}px;height:${s*1.2}px;background:${Math.random()>.5?'#e8607a':'#c4526a'};animation-duration:${7+Math.random()*9}s;animation-delay:${Math.random()*12}s;`;
+    c.appendChild(p);
+  }
+})();
+
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  document.getElementById('progress').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';
+});
+
+function enter(){
+  const land=document.getElementById('landing');
+  land.style.transition='opacity 1s ease, transform 1s ease';
+  land.style.opacity='0'; land.style.transform='scale(1.05)';
+  setTimeout(()=>{
+    land.style.display='none';
+    document.getElementById('main').style.display='block';
+    document.getElementById('music-bar').style.display='flex';
+    const tag=document.createElement('script');
+    tag.src='https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+    window.onYouTubeIframeAPIReady=function(){
+      const div=document.createElement('div');
+      div.id='yt-player';
+      div.style.cssText='position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;';
+      document.body.appendChild(div);
+      new YT.Player('yt-player',{
+        videoId:'oafxkMv4xnc',
+        playerVars:{autoplay:1,loop:1,playlist:'oafxkMv4xnc',controls:0,mute:0},
+        events:{onReady:function(e){e.target.setVolume(80);e.target.playVideo();}}
+      });
+    };
+    initReveal();
+  },1000);
+}
+
+function initReveal(){
+  const els=document.querySelectorAll('.part-label,.sec-head,.letter,.mem-card');
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting) setTimeout(()=>e.target.classList.add('show'),i*70);
+    });
+  },{threshold:0.08});
+  els.forEach(el=>io.observe(el));
+}
+</script>
+</body>
+</html>
